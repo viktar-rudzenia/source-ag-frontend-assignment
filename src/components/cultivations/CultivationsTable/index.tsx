@@ -72,7 +72,7 @@ export default function CultivationsTable() {
       )}
 
       {!isCultivationsDataLoading && !cultivationDataError && cultivationsData.length === 0 && (
-        <div>Unfortunately, no cultivations were found.</div>
+        <div className={styles.emptyCultivations}>Unfortunately, no cultivations were found.</div>
       )}
     </div>
   );

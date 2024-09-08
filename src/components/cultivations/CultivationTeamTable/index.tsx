@@ -13,6 +13,7 @@ import { SharedButton } from '@/components/shared';
 import CultivationRoleColumnCell from '../CultivationRoleCustomCell';
 
 import styles from './index.module.scss';
+import CultivationRemoveUserButton from '../CultivationRemoveUserButton';
 
 export default function CultivationTeamTable() {
   const { cultivationId }: { cultivationId: string } = useParams();
@@ -45,13 +46,7 @@ export default function CultivationTeamTable() {
       dataIndex: 'action',
       key: 'action',
       render: (_, { cultivation_id, user }) => (
-        <Button
-          onClick={() => console.log(`remove user in ${cultivation_id} with user id ${user.id}`)}
-          type="primary"
-          danger
-        >
-          Remove
-        </Button>
+        <CultivationRemoveUserButton cultivationId={cultivation_id} user={user} />
       ),
     },
   ];
@@ -98,7 +93,11 @@ export default function CultivationTeamTable() {
 
       {!isCultivationTeamDataLoading &&
         !cultivationTeamDataError &&
-        cultivationTeamData?.length === 0 && <div>Unfortunately, no cultivations were found.</div>}
+        cultivationTeamData?.length === 0 && (
+          <div className={styles.emptyCultivationTeam}>
+            Unfortunately, no team members were found for this Cultivation Team.
+          </div>
+        )}
     </div>
   );
 }

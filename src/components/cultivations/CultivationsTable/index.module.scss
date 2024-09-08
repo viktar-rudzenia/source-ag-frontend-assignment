@@ -10,3 +10,12 @@
   width: 100%;
   height: 100%;
 }
+
+.emptyCultivations {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: rem(24px);
+  padding: 30px;
+}
