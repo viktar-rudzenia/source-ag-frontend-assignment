@@ -1,5 +1,9 @@
 # Source.ag Frontend assignment
 
+## Link to application
+
+[Link to the deployed application](https://source-ag-frontend-assignment.vercel.app/)
+
 ## Project overview. Stack
 
 [Next.js](https://www.npmjs.com/package/next) 14 (App Router approach)
