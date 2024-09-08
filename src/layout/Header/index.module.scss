@@ -1,0 +1,40 @@
+.wrapper {
+  height: 98px;
+  min-height: 98px;
+  max-height: 98px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #cfcfcf91;
+  padding: 0 40px;
+  gap: 40px;
+  z-index: 999;
+  background: inherit;
+}
+
+.logoImage:hover {
+  cursor: pointer;
+  box-shadow: 0 2px 0 0 black;
+}
+
+.navigationList {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+.navigationBarLink {
+  text-decoration: none;
+  color: black;
+  font-size: rem(20px);
+
+  &:hover {
+    box-shadow: 0 2px 0 0 black;
+  }
+}
+
+.navigationBarLinkActive {
+  font-weight: bold;
+}

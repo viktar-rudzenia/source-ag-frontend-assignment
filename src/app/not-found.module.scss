@@ -1,0 +1,13 @@
+.NotFound__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.NotFound__link {
+  text-decoration: none;
+  color: white;
+}
