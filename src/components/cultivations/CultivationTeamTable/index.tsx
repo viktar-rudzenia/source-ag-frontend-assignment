@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Button, Result, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
@@ -43,7 +42,11 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
       dataIndex: 'action',
       key: 'action',
       render: (_, { cultivation_id, user }) => (
-        <Button type="primary" danger>
+        <Button
+          onClick={() => console.log(`remove user in ${cultivation_id} with user id ${user.id}`)}
+          type="primary"
+          danger
+        >
           Remove
         </Button>
       ),

@@ -19,7 +19,7 @@ export default function CultivationRoleColumnCell({ roleId }: { roleId: number }
   } = useSWR<CultivationRolesInterface[]>(ApiRoutes.cultivationRoles, fetcher);
 
   const cultivationRolesObj = useMemo(() => {
-    let cultivationRoles: { [key: string]: CultivationRolesInterface } = {};
+    const cultivationRoles: { [key: string]: CultivationRolesInterface } = {};
     cultivationRolesData?.forEach((cultivationRole) => {
       cultivationRoles[cultivationRole.id] = cultivationRole;
     });
