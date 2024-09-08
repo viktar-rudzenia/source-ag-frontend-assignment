@@ -65,6 +65,7 @@ export default function CultivationsTable() {
 
       {cultivationsData && cultivationsData.length > 0 && (
         <Table
+          rowKey="id"
           className={styles.table}
           columns={cultivationColumns}
           dataSource={cultivationsData}

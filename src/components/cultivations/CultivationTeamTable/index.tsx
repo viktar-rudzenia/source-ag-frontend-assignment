@@ -90,6 +90,7 @@ export default function CultivationTeamTable() {
       {cultivationTeamData && cultivationTeamData.length > 0 && (
         <>
           <Table
+            rowKey={(record) => `${record.cultivation_id}-${record.user.id}-${record.role.id}`}
             className={styles.table}
             columns={cultivationTeamColumns}
             dataSource={cultivationTeamData}

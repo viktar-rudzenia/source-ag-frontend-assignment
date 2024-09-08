@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button, Input, Result, Spin, Table, TableColumnsType } from 'antd';
+import { Button, Input, Result, Spin, Table, TableColumnsType, TableProps } from 'antd';
 import useSWR from 'swr';
 
 import { fetcher } from '@/utils/fetcher';
@@ -10,6 +10,8 @@ import { UserInterface } from '@/utils/interfaces';
 
 import styles from './index.module.scss';
 
+type TableRowSelection<T extends object = object> = TableProps<T>['rowSelection'];
+
 export default function AddUsersToCultivation({
   setIsAddUserModalOpen,
 }: {
@@ -17,6 +19,7 @@ export default function AddUsersToCultivation({
 }) {
   const [searchUser, setSearchUser] = useState<string>('');
   const [usersDataWithAppliedSearch, setUsersDataWithAppliedSearch] = useState<UserInterface[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   const {
     data: usersData,
@@ -44,6 +47,18 @@ export default function AddUsersToCultivation({
   const handleSearchUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchUser(e.target.value);
   };
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const rowSelection: TableRowSelection<UserInterface> = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
+  const hasSelected = selectedRowKeys.length > 0;
 
   return (
     <div className={styles.wrapper}>
@@ -74,6 +89,7 @@ export default function AddUsersToCultivation({
             onChange={handleSearchUser}
           />
           <Table
+            rowKey="id"
             className={styles.table}
             columns={addUsersColumns}
             dataSource={usersDataWithAppliedSearch}
@@ -82,9 +98,14 @@ export default function AddUsersToCultivation({
               defaultPageSize: 10,
               pageSizeOptions: [1, 5, 10],
             }}
+            rowSelection={rowSelection}
           />
-          <Button type="primary" onClick={() => setIsAddUserModalOpen(false)}>
-            Add to cultivation
+          <Button
+            disabled={!hasSelected}
+            type="primary"
+            onClick={() => setIsAddUserModalOpen(false)}
+          >
+            Add to cultivation team {hasSelected && `${selectedRowKeys.length} users`}
           </Button>
         </>
       )}
