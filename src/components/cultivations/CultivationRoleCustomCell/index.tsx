@@ -7,6 +7,7 @@ import { Button, Spin } from 'antd';
 import { ApiRoutes } from '@/utils/constants';
 import { fetcher } from '@/utils/fetcher';
 import { CultivationRolesInterface } from '@/utils/interfaces';
+import CultivationRoleChangeDropdown from '../CultivationRoleChangeDropdown';
 
 import styles from './index.module.scss';
 
@@ -31,13 +32,16 @@ export default function CultivationRoleColumnCell({ roleId }: { roleId: number }
       {isCultivationRolesDataLoading && <Spin size="large" />}
 
       {!isCultivationRolesDataLoading && (
-        <div>
+        <>
           {cultivationRolesData && cultivationRolesData.length > 0 ? (
-            cultivationRolesObj[roleId]?.name
+            <CultivationRoleChangeDropdown
+              cultivationRolesObj={cultivationRolesObj}
+              roleId={roleId}
+            />
           ) : (
-            <>Role id: {roleId}</>
+            <div>Role id: {roleId}</div>
           )}
-        </div>
+        </>
       )}
 
       {!isCultivationRolesDataLoading && cultivationDataError && (
