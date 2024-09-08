@@ -30,10 +30,14 @@ export default function CultivationRoleColumnCell({ roleId }: { roleId: number }
     <div className={styles.wrapper}>
       {isCultivationRolesDataLoading && <Spin size="large" />}
 
-      {cultivationRolesData && cultivationRolesData.length > 0 ? (
-        <div>{cultivationRolesObj[roleId]?.name}</div>
-      ) : (
-        <div>Role id: {roleId}</div>
+      {!isCultivationRolesDataLoading && (
+        <div>
+          {cultivationRolesData && cultivationRolesData.length > 0 ? (
+            cultivationRolesObj[roleId]?.name
+          ) : (
+            <>Role id: {roleId}</>
+          )}
+        </div>
       )}
 
       {!isCultivationRolesDataLoading && cultivationDataError && (
