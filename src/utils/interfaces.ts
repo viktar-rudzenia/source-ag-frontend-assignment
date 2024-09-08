@@ -9,3 +9,9 @@ export interface UserInCultivationInterface {
     name: string;
   };
 }
+
+export interface CultivationRolesInterface {
+  description: string;
+  id: number;
+  name: string;
+}

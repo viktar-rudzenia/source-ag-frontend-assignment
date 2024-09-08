@@ -1,42 +1,19 @@
 'use client';
 
+import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Button, Result, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import Link from 'next/link';
 
 import { fetcher } from '@/utils/fetcher';
-import { UserInCultivationInterface } from '@/utils/interfaces';
+import { CultivationRolesInterface, UserInCultivationInterface } from '@/utils/interfaces';
 import { PageRoutes, ApiRoutes } from '@/utils/constants';
 import { SharedButton } from '@/components/shared';
 import { rowSelectionForCultivationTeam } from './constant';
+import CultivationRoleColumnCell from '../CultivationRoleCustomCell';
 
 import styles from './index.module.scss';
-
-const cultivationTeamColumns: TableColumnsType<UserInCultivationInterface> = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (_, { user }) => user.name,
-  },
-  {
-    title: 'Role',
-    dataIndex: 'role',
-    key: 'role',
-    render: (_, { role }) => role.id,
-  },
-  {
-    title: 'Action',
-    dataIndex: 'action',
-    key: 'action',
-    render: (_, { cultivation_id, user }) => (
-      <Button type="primary" danger>
-        Remove
-      </Button>
-    ),
-  },
-];
 
 export default function CultivationTeamTable({ cultivationId }: { cultivationId: string }) {
   const {
@@ -48,6 +25,48 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
     ApiRoutes.getUsersInCultivationApi(cultivationId),
     fetcher
   );
+
+  const {
+    data: cultivationRolesData,
+    isLoading: isCultivationRolesDataLoading,
+    error: cultivationDataError,
+    mutate: mutateCultivationsData,
+  } = useSWR<CultivationRolesInterface[]>(ApiRoutes.cultivationRoles, fetcher);
+
+  const cultivationRolesObj = useMemo(() => {
+    let cultivationRoles: { [key: string]: CultivationRolesInterface } = {};
+    cultivationRolesData?.forEach((cultivationRole) => {
+      cultivationRoles[cultivationRole.id] = cultivationRole;
+    });
+    return cultivationRoles;
+  }, [cultivationRolesData]);
+
+  const cultivationTeamColumns: TableColumnsType<UserInCultivationInterface> = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      render: (_, { user }) => user.name,
+    },
+    {
+      title: 'Role',
+      dataIndex: 'role',
+      key: 'role',
+      render: (_, { role }) => (
+        <CultivationRoleColumnCell roleId={role.id} cultivationRolesObj={cultivationRolesObj} />
+      ),
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+      render: (_, { cultivation_id, user }) => (
+        <Button type="primary" danger>
+          Remove
+        </Button>
+      ),
+    },
+  ];
 
   return (
     <div className={styles.wrapper}>
