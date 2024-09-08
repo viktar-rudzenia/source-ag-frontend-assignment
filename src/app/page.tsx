@@ -10,11 +10,9 @@ export default function Home() {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <h1>Home page for Source ag assignment</h1>
-        <SharedButton>
-          <Link className={styles.link} href={PageRoutes.CULTIVATIONS}>
-            Go to cultivations page
-          </Link>
-        </SharedButton>
+        <Link className={styles.link} href={PageRoutes.CULTIVATIONS}>
+          Go to cultivations page
+        </Link>
       </div>
       <div className={styles.background} />
     </div>

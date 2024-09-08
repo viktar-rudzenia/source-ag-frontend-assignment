@@ -21,6 +21,22 @@
 .link {
   text-decoration: none;
   color: white;
+  transition: $default-transition;
+  background-color: #726f6f;
+  border-radius: 5px;
+  padding: 8px 16px;
+
+  @media (max-width: $tabletBreakpoint) {
+    font-size: 12px;
+  }
+
+  &:hover {
+    background-color: #1d1c1c;
+  }
+
+  &:active {
+    transform: translate(0, 2px);
+  }
 }
 
 .loader {

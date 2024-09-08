@@ -93,8 +93,8 @@ export default function CultivationRoleChangeDropdown({
         okButtonProps={{ loading: isChangeUserRoleLoading }}
       >
         <div>
-          Do you really want change role for {user.name} from {cultivationRolesObj[roleId].name} to{' '}
-          {cultivationRoleToChange && cultivationRolesObj[cultivationRoleToChange.id].name}
+          Do you really want to change role for {user.name} from {cultivationRolesObj[roleId].name}{' '}
+          to {cultivationRoleToChange && cultivationRolesObj[cultivationRoleToChange.id].name}?
         </div>
       </Modal>
     </>

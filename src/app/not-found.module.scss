@@ -1,4 +1,4 @@
-.NotFound__wrapper {
+.wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -7,7 +7,23 @@
   flex-grow: 1;
 }
 
-.NotFound__link {
+.link {
   text-decoration: none;
   color: white;
+  transition: $default-transition;
+  background-color: #1c7d1c;
+  border-radius: 5px;
+  padding: 8px 16px;
+
+  @media (max-width: $tabletBreakpoint) {
+    font-size: 12px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  &:active {
+    transform: translate(0, 2px);
+  }
 }

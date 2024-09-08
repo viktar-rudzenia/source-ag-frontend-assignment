@@ -20,7 +20,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className={styles.Error__wrapper}>
+    <div className={styles.wrapper}>
       <h2>Something went wrong!</h2>
       <SharedButton
         onClick={
@@ -31,11 +31,9 @@ export default function Error({
         Try again
       </SharedButton>
       or
-      <SharedButton>
-        <Link className={styles.Error__link} href={PageRoutes.HOME}>
-          Back to Home
-        </Link>
-      </SharedButton>
+      <Link className={styles.link} href={PageRoutes.HOME}>
+        Back to Home
+      </Link>
       or
       <SharedButton onClick={() => window.location.reload()}>Refresh the page</SharedButton>
     </div>

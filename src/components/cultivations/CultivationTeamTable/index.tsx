@@ -62,11 +62,9 @@ export default function CultivationTeamTable() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <SharedButton>
-          <Link className={styles.link} href={PageRoutes.CULTIVATIONS}>
-            Go back to cultivations
-          </Link>
-        </SharedButton>
+        <Link className={styles.link} href={PageRoutes.CULTIVATIONS}>
+          Go back to cultivations
+        </Link>
         <h2>Cultivation Team id: {cultivationId}</h2>
       </div>
       {isCultivationTeamDataLoading && <Spin className={styles.loader} size="large" />}
