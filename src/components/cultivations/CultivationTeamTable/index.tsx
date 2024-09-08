@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import useSWR from 'swr';
-import { Button, Result, Spin, Table } from 'antd';
+import { Button, Modal, Result, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -11,12 +12,15 @@ import { UserInCultivationInterface } from '@/utils/interfaces';
 import { PageRoutes, ApiRoutes } from '@/utils/constants';
 import { SharedButton } from '@/components/shared';
 import CultivationRoleColumnCell from '../CultivationRoleCustomCell';
+import CultivationRemoveUserButton from '../CultivationRemoveUserButton';
+import AddUsersToCultivation from '../AddUsersToCultivation';
 
 import styles from './index.module.scss';
-import CultivationRemoveUserButton from '../CultivationRemoveUserButton';
 
 export default function CultivationTeamTable() {
   const { cultivationId }: { cultivationId: string } = useParams();
+
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
 
   const {
     data: cultivationTeamData,
@@ -84,11 +88,20 @@ export default function CultivationTeamTable() {
       )}
 
       {cultivationTeamData && cultivationTeamData.length > 0 && (
-        <Table
-          className={styles.table}
-          columns={cultivationTeamColumns}
-          dataSource={cultivationTeamData}
-        />
+        <>
+          <Table
+            className={styles.table}
+            columns={cultivationTeamColumns}
+            dataSource={cultivationTeamData}
+          />
+          <Button
+            type="primary"
+            className={styles.addUsers}
+            onClick={() => setIsAddUserModalOpen(true)}
+          >
+            Add teammember
+          </Button>
+        </>
       )}
 
       {!isCultivationTeamDataLoading &&
@@ -98,6 +111,16 @@ export default function CultivationTeamTable() {
             Unfortunately, no team members were found for this Cultivation Team.
           </div>
         )}
+
+      <Modal
+        title="Add Users To Cultivation"
+        open={!!isAddUserModalOpen}
+        onCancel={() => setIsAddUserModalOpen(false)}
+        centered
+        footer={null}
+      >
+        <AddUsersToCultivation />
+      </Modal>
     </div>
   );
 }
