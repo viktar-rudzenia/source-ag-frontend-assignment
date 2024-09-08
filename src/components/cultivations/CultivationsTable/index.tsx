@@ -47,7 +47,7 @@ export default function CultivationsTable() {
         <Result
           status="warning"
           title={
-            <div className={styles.resultWarning}>
+            <div>
               An error occurred, please try downloading Cultivations again or refreshing the page
             </div>
           }

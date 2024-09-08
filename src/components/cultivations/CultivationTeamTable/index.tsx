@@ -7,10 +7,9 @@ import type { TableColumnsType } from 'antd';
 import Link from 'next/link';
 
 import { fetcher } from '@/utils/fetcher';
-import { CultivationRolesInterface, UserInCultivationInterface } from '@/utils/interfaces';
+import { UserInCultivationInterface } from '@/utils/interfaces';
 import { PageRoutes, ApiRoutes } from '@/utils/constants';
 import { SharedButton } from '@/components/shared';
-import { rowSelectionForCultivationTeam } from './constant';
 import CultivationRoleColumnCell from '../CultivationRoleCustomCell';
 
 import styles from './index.module.scss';
@@ -26,21 +25,6 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
     fetcher
   );
 
-  const {
-    data: cultivationRolesData,
-    isLoading: isCultivationRolesDataLoading,
-    error: cultivationDataError,
-    mutate: mutateCultivationsData,
-  } = useSWR<CultivationRolesInterface[]>(ApiRoutes.cultivationRoles, fetcher);
-
-  const cultivationRolesObj = useMemo(() => {
-    let cultivationRoles: { [key: string]: CultivationRolesInterface } = {};
-    cultivationRolesData?.forEach((cultivationRole) => {
-      cultivationRoles[cultivationRole.id] = cultivationRole;
-    });
-    return cultivationRoles;
-  }, [cultivationRolesData]);
-
   const cultivationTeamColumns: TableColumnsType<UserInCultivationInterface> = [
     {
       title: 'Name',
@@ -52,9 +36,7 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
       title: 'Role',
       dataIndex: 'role',
       key: 'role',
-      render: (_, { role }) => (
-        <CultivationRoleColumnCell roleId={role.id} cultivationRolesObj={cultivationRolesObj} />
-      ),
+      render: (_, { role }) => <CultivationRoleColumnCell roleId={role.id} />,
     },
     {
       title: 'Action',
@@ -84,7 +66,7 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
         <Result
           status="warning"
           title={
-            <div className={styles.resultWarning}>
+            <div>
               An error occurred, please try downloading Cultivations again or refreshing the page
             </div>
           }
@@ -102,7 +84,6 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
 
       {cultivationTeamData && cultivationTeamData.length > 0 && (
         <Table
-          rowSelection={rowSelectionForCultivationTeam}
           className={styles.table}
           columns={cultivationTeamColumns}
           dataSource={cultivationTeamData}
