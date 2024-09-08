@@ -11,7 +11,13 @@ import CultivationRoleChangeDropdown from '../CultivationRoleChangeDropdown';
 
 import styles from './index.module.scss';
 
-export default function CultivationRoleColumnCell({ roleId }: { roleId: number }) {
+export default function CultivationRoleColumnCell({
+  roleId,
+  user,
+}: {
+  roleId: number;
+  user: { id: number; name: string };
+}) {
   const {
     data: cultivationRolesData,
     isLoading: isCultivationRolesDataLoading,
@@ -37,6 +43,7 @@ export default function CultivationRoleColumnCell({ roleId }: { roleId: number }
             <CultivationRoleChangeDropdown
               cultivationRolesObj={cultivationRolesObj}
               roleId={roleId}
+              user={user}
             />
           ) : (
             <div>Role id: {roleId}</div>

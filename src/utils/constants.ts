@@ -13,7 +13,7 @@ export const ApiRoutes = {
   users: `${API_URL}/users`,
   cultivationRoles: `${API_URL}/cultivation-roles`,
   usersInCultivationPattern: `${API_URL}/cultivations/${CULTIVATION_ID_TEXT}/users`,
-  changeUserInCultivationPattern: `${API_URL}/${CULTIVATION_ID_TEXT}/users/${USER_ID_TEXT}`,
+  changeUserInCultivationPattern: `${API_URL}/cultivations/${CULTIVATION_ID_TEXT}/users/${USER_ID_TEXT}`,
   getUsersInCultivationApi: (cultivationId: string) =>
     ApiRoutes.usersInCultivationPattern.replace(CULTIVATION_ID_TEXT, cultivationId),
   getChangeUserInCultivationApi: ({

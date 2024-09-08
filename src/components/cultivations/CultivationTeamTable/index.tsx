@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { Button, Result, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import { fetcher } from '@/utils/fetcher';
 import { UserInCultivationInterface } from '@/utils/interfaces';
@@ -13,7 +14,9 @@ import CultivationRoleColumnCell from '../CultivationRoleCustomCell';
 
 import styles from './index.module.scss';
 
-export default function CultivationTeamTable({ cultivationId }: { cultivationId: string }) {
+export default function CultivationTeamTable() {
+  const { cultivationId }: { cultivationId: string } = useParams();
+
   const {
     data: cultivationTeamData,
     isLoading: isCultivationTeamDataLoading,
@@ -35,7 +38,7 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
       title: 'Role',
       dataIndex: 'role',
       key: 'role',
-      render: (_, { role }) => <CultivationRoleColumnCell roleId={role.id} />,
+      render: (_, { role, user }) => <CultivationRoleColumnCell roleId={role.id} user={user} />,
     },
     {
       title: 'Action',
@@ -63,7 +66,7 @@ export default function CultivationTeamTable({ cultivationId }: { cultivationId:
         </SharedButton>
         <h2>Cultivation Team id: {cultivationId}</h2>
       </div>
-      {isCultivationTeamDataLoading && <Spin size="large" />}
+      {isCultivationTeamDataLoading && <Spin className={styles.loader} size="large" />}
 
       {!isCultivationTeamDataLoading && cultivationTeamDataError && (
         <Result
