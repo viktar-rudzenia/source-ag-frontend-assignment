@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 
 import { SharedButton } from '@/components/shared';
-import { AllRoutesEnum } from '@/utils/constants';
+import { PageRoutes } from '@/utils/constants';
 
 import styles from './error.module.scss';
 
@@ -32,7 +32,7 @@ export default function Error({
       </SharedButton>
       or
       <SharedButton>
-        <Link className={styles.Error__link} href={AllRoutesEnum.HOME}>
+        <Link className={styles.Error__link} href={PageRoutes.HOME}>
           Back to Home
         </Link>
       </SharedButton>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import cn from 'classnames';
 
-import { AllRoutesEnum } from '@/utils/constants';
+import { PageRoutes } from '@/utils/constants';
 import { navigationBarLinks } from './constants';
 
 import styles from './index.module.scss';
@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className={styles.wrapper}>
       <div>
-        <Link href={AllRoutesEnum.HOME}>
+        <Link href={PageRoutes.HOME}>
           <Image
             className={styles.logoImage}
             src="/source-ag-logo.svg"

@@ -1,14 +1,14 @@
-import { AllRoutesEnum } from '@/utils/constants';
+import { PageRoutes } from '@/utils/constants';
 
 export const navigationBarLinks = {
-  [AllRoutesEnum.HOME]: {
+  [PageRoutes.HOME]: {
     id: 1,
     name: 'Home',
-    href: AllRoutesEnum.HOME,
+    href: PageRoutes.HOME,
   },
-  [AllRoutesEnum.CULTIVATION_TEAM]: {
+  [PageRoutes.CULTIVATIONS]: {
     id: 2,
-    name: 'Cultivation team',
-    href: AllRoutesEnum.CULTIVATION_TEAM,
+    name: 'Cultivations',
+    href: PageRoutes.CULTIVATIONS,
   },
 };

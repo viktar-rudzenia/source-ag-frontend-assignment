@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { SharedButton } from '@/components/shared';
-import { AllRoutesEnum } from '@/utils/constants';
+import { PageRoutes } from '@/utils/constants';
 
 import styles from './not-found.module.scss';
 
@@ -11,7 +11,7 @@ export default function NotFound() {
       <h2>Page not found...</h2>
       <p>We&apos;re unable to find the page you&apos;re looking for</p>
       <SharedButton>
-        <Link className={styles.NotFound__link} href={AllRoutesEnum.HOME}>
+        <Link className={styles.NotFound__link} href={PageRoutes.HOME}>
           Back to Home
         </Link>
       </SharedButton>
