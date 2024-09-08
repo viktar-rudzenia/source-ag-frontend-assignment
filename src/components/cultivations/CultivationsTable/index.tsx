@@ -10,12 +10,12 @@ import { PageRoutes, ApiRoutes } from '@/utils/constants';
 
 import styles from './index.module.scss';
 
-interface DataType {
+interface CultivationInterface {
   id: string;
   name: string;
 }
 
-const cultivationColumns: TableColumnsType<DataType> = [
+const cultivationColumns: TableColumnsType<CultivationInterface> = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -68,6 +68,7 @@ export default function CultivationsTable() {
           className={styles.table}
           columns={cultivationColumns}
           dataSource={cultivationsData}
+          pagination={{ position: ['bottomCenter'] }}
         />
       )}
 

@@ -39,6 +39,11 @@
   padding: 30px;
 }
 
-.addUsers {
+.addUsersBtn {
   max-width: 300px;
+}
+
+.addUsersModal {
+  height: 90vh;
+  overflow: auto;
 }

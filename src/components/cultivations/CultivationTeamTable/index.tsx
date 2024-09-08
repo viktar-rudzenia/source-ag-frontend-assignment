@@ -93,10 +93,11 @@ export default function CultivationTeamTable() {
             className={styles.table}
             columns={cultivationTeamColumns}
             dataSource={cultivationTeamData}
+            pagination={{ position: ['bottomCenter'] }}
           />
           <Button
             type="primary"
-            className={styles.addUsers}
+            className={styles.addUsersBtn}
             onClick={() => setIsAddUserModalOpen(true)}
           >
             Add teammember
@@ -107,19 +108,29 @@ export default function CultivationTeamTable() {
       {!isCultivationTeamDataLoading &&
         !cultivationTeamDataError &&
         cultivationTeamData?.length === 0 && (
-          <div className={styles.emptyCultivationTeam}>
-            Unfortunately, no team members were found for this Cultivation Team.
-          </div>
+          <>
+            <div className={styles.emptyCultivationTeam}>
+              Unfortunately, no team members were found for this Cultivation Team.
+            </div>
+            <Button
+              type="primary"
+              className={styles.addUsersBtn}
+              onClick={() => setIsAddUserModalOpen(true)}
+            >
+              Add teammember
+            </Button>
+          </>
         )}
 
       <Modal
-        title="Add Users To Cultivation"
+        className={styles.addUsersModal}
+        title="Add Users To Cultivation Team"
         open={!!isAddUserModalOpen}
         onCancel={() => setIsAddUserModalOpen(false)}
         centered
         footer={null}
       >
-        <AddUsersToCultivation />
+        <AddUsersToCultivation setIsAddUserModalOpen={setIsAddUserModalOpen} />
       </Modal>
     </div>
   );
