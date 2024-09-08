@@ -30,8 +30,10 @@ enum AddUsersRequestType {
 
 export default function AddUsersToCultivation({
   setIsAddUserModalOpen,
+  cultivationTeamUserIds,
 }: {
   setIsAddUserModalOpen: (value: boolean) => void;
+  cultivationTeamUserIds: number[];
 }) {
   const { cultivationId }: { cultivationId: string } = useParams();
 
@@ -70,6 +72,10 @@ export default function AddUsersToCultivation({
   const rowSelection: TableRowSelection<UserInterface> = {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => setSelectedRowKeys(newSelectedRowKeys),
+    getCheckboxProps: (user: UserInterface) => ({
+      disabled: cultivationTeamUserIds.includes(user.id), // Column configuration not to be checked
+      name: user.name,
+    }),
   };
 
   const hasUsersSelected = selectedRowKeys.length > 0;

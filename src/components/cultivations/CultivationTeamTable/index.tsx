@@ -55,6 +55,10 @@ export default function CultivationTeamTable() {
     },
   ];
 
+  const cultivationTeamDataWithValidation = cultivationTeamData
+    ? cultivationTeamData.filter((cultivation) => typeof cultivation.user.id === 'number')
+    : [];
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -93,7 +97,7 @@ export default function CultivationTeamTable() {
             rowKey={(record) => `${record.cultivation_id}-${record.user.id}-${record.role.id}`}
             className={styles.table}
             columns={cultivationTeamColumns}
-            dataSource={cultivationTeamData}
+            dataSource={cultivationTeamDataWithValidation}
             pagination={{ position: ['bottomCenter'] }}
           />
           <Button
@@ -108,7 +112,7 @@ export default function CultivationTeamTable() {
 
       {!isCultivationTeamDataLoading &&
         !cultivationTeamDataError &&
-        cultivationTeamData?.length === 0 && (
+        cultivationTeamDataWithValidation?.length === 0 && (
           <>
             <div className={styles.emptyCultivationTeam}>
               Unfortunately, no team members were found for this Cultivation Team.
@@ -131,7 +135,12 @@ export default function CultivationTeamTable() {
         centered
         footer={null}
       >
-        <AddUsersToCultivation setIsAddUserModalOpen={setIsAddUserModalOpen} />
+        <AddUsersToCultivation
+          setIsAddUserModalOpen={setIsAddUserModalOpen}
+          cultivationTeamUserIds={cultivationTeamDataWithValidation.map(
+            (cultivationTeam) => cultivationTeam.user.id
+          )}
+        />
       </Modal>
     </div>
   );
