@@ -19,3 +19,9 @@
   font-size: rem(24px);
   padding: 30px;
 }
+
+.actionBtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}

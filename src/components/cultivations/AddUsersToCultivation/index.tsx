@@ -100,13 +100,18 @@ export default function AddUsersToCultivation({
             }}
             rowSelection={rowSelection}
           />
-          <Button
-            disabled={!hasSelected}
-            type="primary"
-            onClick={() => setIsAddUserModalOpen(false)}
-          >
-            Add to cultivation team {hasSelected && `${selectedRowKeys.length} users`}
-          </Button>
+          <div className={styles.actionBtns}>
+            <Button disabled={!hasSelected} onClick={() => setSelectedRowKeys([])}>
+              Reset Selection
+            </Button>
+            <Button
+              disabled={!hasSelected}
+              type="primary"
+              onClick={() => setIsAddUserModalOpen(false)}
+            >
+              Add to cultivation team {hasSelected && `${selectedRowKeys.length} users`}
+            </Button>
+          </div>
         </>
       )}
 
