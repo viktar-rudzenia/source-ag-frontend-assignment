@@ -55,7 +55,7 @@ export default function CultivationRoleChangeDropdown({
         ApiRoutes.getChangeUserInCultivationApi({ cultivationId, userId: `${user.id}` }),
         {
           role: {
-            id: roleId,
+            id: cultivationRoleToChange?.id,
           },
         }
       );
